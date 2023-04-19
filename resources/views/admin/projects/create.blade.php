@@ -64,7 +64,7 @@
             <label for="title" class="form-label">Immagine</label>
         </div>
         <div class="col-md-10">
-            <input type= "file" name = "image" id = "image" class="form-control"/>
+            <input type= "file" name = "image" id = "image" value ="{{ $project->image }}" class="form-control"/>
         </div>
     </div>
 
@@ -73,7 +73,7 @@
             <label for="title" class="form-label">Testo</label>
         </div>
         <div class="col-md-10">
-            <textarea type= "text" name = "text" id = "text" class="form-control" rows="5"></textarea>
+            <textarea type= "text" name = "text" id = "text" class="form-control" rows="5">{{ $project->text }}</textarea>
         </div>
     </div>
             
