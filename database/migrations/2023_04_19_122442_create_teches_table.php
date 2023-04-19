@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('teches', function (Blueprint $table) {
             $table->id();
+            $table->string('label', 100);
+            $table->char('color', 7);
             $table->timestamps();
         });
     }
