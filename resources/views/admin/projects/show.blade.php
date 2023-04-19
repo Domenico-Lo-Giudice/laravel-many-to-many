@@ -16,11 +16,17 @@
         <span class="badge rounded-pill" style="background-color: {{ $project->type?->color }}"> {{ $project->type?->label }}</span>
        
     </p>
+    
     <p>
         <strong>Teches: </strong>
-        <span class="badge rounded-pill" style="background-color: {{ $project->tech?->color }}"> {{ $project->tech?->label }}</span>
+        @forelse ($project->teches as $tech)
+        {!! $tech->getBadgeHTML() !!}
+        @empty
+        Nessuna tech associata
+        @endforelse
        
     </p>
+
     <figure>
         <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->slug }}" width="300" class="float-start me-3 mb-1" >
     </figure>
