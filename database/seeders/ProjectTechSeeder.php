@@ -19,12 +19,12 @@ class ProjectTechSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $projects = Project::all()->pluck('id');
+        
         $teches = Tech::all()->pluck('id');
 
-        for($i = 0; $i < 40; $i++) {
-            $project = Project::find($faker->randomElement($projects));
-            $project->teches()->attach($faker->randomElement($teches));
+        for($i = 1; $i < 40; $i++) {
+            $project = Project::find($i);
+            $project->teches()->attach($faker->randomElements($teches, 3));
         }
     }
 }
