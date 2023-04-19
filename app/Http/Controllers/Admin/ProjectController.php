@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Tech;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +35,8 @@ class ProjectController extends Controller
     {
         $project = new Project;
         $types = Type::orderBy('label')->get();
-        return view('admin.projects.create', compact('project', 'types'));
+        $teches = Tech::orderBy('label')->get();
+        return view('admin.projects.create', compact('project', 'types', 'teches'));
     }
 
     /**
@@ -91,7 +95,8 @@ class ProjectController extends Controller
     {
 
         $types = Type::orderBy('label')->get();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $teches = Tech::orderBy('label')->get();
+        return view('admin.projects.edit', compact('project', 'types', 'teches'));
     }
 
     /**
@@ -103,6 +108,8 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
+        
 
         $request->validate([
             'image' => 'nullable|image|mimes:jpg,png,jpeg',
@@ -121,6 +128,12 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
+
+        $project->update($data);
+        if(Arr::exists($data, 'teches')) 
+             $project->teches()->sync($data['teches']);
+        else 
+            $project->teches()->detach();
 
         return to_route('admin.projects.show', $project);
     }

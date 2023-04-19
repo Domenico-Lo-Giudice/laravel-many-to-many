@@ -40,6 +40,23 @@
                   </select>
             </div>
         </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-2 text-end">
+                <label for="type_id" class="form-label">Teches</label>
+            </div>
+            <div class="col-md-10">
+                @foreach ($teches as $tech)
+                    <input type="checkbox" id="tech-{{ $tech->id }}" value="{{ $tech->id }}" name="teches[]" 
+                        class="form-check-control"> 
+                    <label for="tech-{{ $tech->id }}">{{ $tech->label }}</label>
+                    <br>
+                @endforeach
+
+
+            </div>
+        </div>
+
     
         <div class="row mb-3">
             <div class="col-md-2 text-end">
