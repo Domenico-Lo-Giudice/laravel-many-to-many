@@ -30,10 +30,41 @@
 
     <div class="row mb-3">
         <div class="col-md-2 text-end">
+            <label for="type_id" class="form-label">Type</label>
+        </div>
+        <div class="col-md-10">
+            <select name = "type_id" id = "type_id" class="form-select @error('type_id') is-invalid @enderror">
+                <option value="">Nessun Type</option>
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->label }}</option>
+                @endforeach
+              </select>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-md-2 text-end">
+            <label for="type_id" class="form-label">Teches</label>
+        </div>
+        <div class="col-md-10">
+            @foreach ($teches as $tech)
+                <input type="checkbox" id="tech-{{ $tech->id }}" value="{{ $tech->id }}" name="teches[]" 
+                    class="form-check-control" @if(in_array($tech->id, old('teches', $project_teches ?? []))) checked @endif> 
+                <label for="tech-{{ $tech->id }}">{{ $tech->label }}</label>
+                <br>
+            @endforeach
+
+
+
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-2 text-end">
             <label for="title" class="form-label">Immagine</label>
         </div>
         <div class="col-md-10">
-            <input type= "text" name = "title" id = "title" class="form-control"/>
+            <input type= "file" name = "image" id = "image" class="form-control"/>
         </div>
     </div>
 
@@ -42,7 +73,7 @@
             <label for="title" class="form-label">Testo</label>
         </div>
         <div class="col-md-10">
-            <textarea type= "text" name = "title" id = "title" class="form-control" rows="5"></textarea>
+            <textarea type= "text" name = "text" id = "text" class="form-control" rows="5"></textarea>
         </div>
     </div>
             
