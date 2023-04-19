@@ -96,7 +96,8 @@ class ProjectController extends Controller
 
         $types = Type::orderBy('label')->get();
         $teches = Tech::orderBy('label')->get();
-        return view('admin.projects.edit', compact('project', 'types', 'teches'));
+        $project_teches = $project->teches->pluck('id')->toArray();
+        return view('admin.projects.edit', compact('project', 'types', 'teches', 'project_teches'));
     }
 
     /**
