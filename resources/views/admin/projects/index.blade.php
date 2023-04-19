@@ -23,6 +23,7 @@
               <th scope="col">Id</th>
               <th scope="col">Titolo</th>
               <th scope="col">Type</th>
+              <th scope="col">Teches</th>
               <th scope="col">Abstract</th>
             </tr>
           </thead>
@@ -34,6 +35,7 @@
               <th scope="row">{{ $project->id }}</th>
               <td>{{ $project->title }}</td>
               <td>{{ $project->type?->label }}</td>
+              <td> @forelse($project->teches as $tech) {{ $tech->label }} @if (!$loop->last), @endif  @empty - @endforelse</td>
               <td>{{ $project->getAbstract() }}</td>
               <td>
                 <a href="{{ route('admin.projects.show', $project)}}">
