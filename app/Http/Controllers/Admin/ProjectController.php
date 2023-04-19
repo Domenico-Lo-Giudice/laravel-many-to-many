@@ -36,7 +36,8 @@ class ProjectController extends Controller
         $project = new Project;
         $types = Type::orderBy('label')->get();
         $teches = Tech::orderBy('label')->get();
-        return view('admin.projects.create', compact('project', 'types', 'teches'));
+        $project_teches = [];
+        return view('admin.projects.create', compact('project', 'types', 'teches', 'project_teches'));
     }
 
     /**
@@ -50,7 +51,8 @@ class ProjectController extends Controller
 
         $request->validate([
             'image' => 'nullable|image|mimes:jpg,png,jpeg',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'teches' => 'nullable|exists:teches,id',
 
         ]);
 
@@ -68,6 +70,9 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
+
+        
+        if(Arr::exists($data, 'teches')) $project->teches()->attach($data['teches']);
 
         return to_route('admin.projects.show', $project);
 
@@ -114,7 +119,8 @@ class ProjectController extends Controller
 
         $request->validate([
             'image' => 'nullable|image|mimes:jpg,png,jpeg',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'teches' => 'nullable|exists:teches,id',
         ]);
 
         $data = $request->all();

@@ -48,10 +48,11 @@
             <div class="col-md-10">
                 @foreach ($teches as $tech)
                     <input type="checkbox" id="tech-{{ $tech->id }}" value="{{ $tech->id }}" name="teches[]" 
-                        class="form-check-control" @if(in_array($tech->id, $project_teches)) checked @endif> 
+                        class="form-check-control" @if(in_array($tech->id, old('teches', $project_teches ?? []))) checked @endif> 
                     <label for="tech-{{ $tech->id }}">{{ $tech->label }}</label>
                     <br>
                 @endforeach
+
 
 
             </div>
