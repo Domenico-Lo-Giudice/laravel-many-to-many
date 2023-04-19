@@ -70,10 +70,10 @@
     
         <div class="row mb-3">
             <div class="col-md-2 text-end">
-                <label for="title" class="form-label">Testo</label>
+                <label for="text" class="form-label">Testo</label>
             </div>
             <div class="col-md-10">
-                <textarea type= "text" name = "title" id = "title" class="form-control" rows="5">{{ $project->text }}</textarea>
+                <textarea type= "text" name = "text" id = "text" class="form-control" rows="5">{{ $project->text }}</textarea>
             </div>
         </div>
                 
